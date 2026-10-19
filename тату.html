@@ -565,9 +565,9 @@ footer .brand .star{animation:slowSpin 18s linear infinite}
         if(node.nodeType===3){
           node.textContent.split(/(\s+)/).forEach(function(tok){
             if(tok.trim()===''){out.push(tok);return}
-            var w=document.createElement('span');w.className='w';w.textContent=tok;out.push(w);
+            out.push('<span class="w">'+tok+'</span>');
           });
-        } else { out.push(node.outerHTML); }
+        } else { out.push(node.outerHTML||node.textContent); }
       });
       return out.join('');
     }).join('<br>');
