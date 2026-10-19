@@ -163,6 +163,7 @@ details p{margin:0 40px 28px 0;color:var(--muted);line-height:1.55;animation:faq
 .contact-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 50% 100%,rgba(125,255,61,.18),transparent 70%)}
 .contact h2{font-size:clamp(44px,9vw,116px);font-weight:800;letter-spacing:-.045em;line-height:.95}
 .contact .addr{color:var(--muted);font-size:clamp(18px,2.2vw,22px);font-style:normal;margin:28px 0 8px;line-height:1.5}
+.contact .route-wrap{margin-top:20px}
 .contact .route{color:var(--lime);font-size:16px;border-bottom:1px solid currentColor;padding-bottom:2px}
 .contact .phone{display:block;font-size:clamp(34px,7vw,72px);font-weight:800;letter-spacing:-.04em;margin:44px 0;transition:color .4s}
 .contact .phone:hover{color:var(--lime)}
@@ -256,8 +257,8 @@ h2.in .em,.rv.in h2 .em{background-size:100% 2px}
 .p-row.flash .val,.svc.flash .svc-price{animation:costGlow 1s ease}
 
 /* contact phone pulse ring */
-.contact .phone{position:relative;display:inline-block}
-.contact .phone:after{content:"";position:absolute;inset:-14% -6%;border-radius:24px;border:1px solid rgba(125,255,61,.35);opacity:0;animation:ring 3.4s ease-in-out infinite}
+.contact .phone{position:relative;display:inline-block;margin:44px auto}
+.contact .phone:after{content:"";position:absolute;inset:-14% -6%;border-radius:24px;border:1px solid rgba(125,255,61,.35);opacity:0;animation:ring 3.4s ease-in-out infinite;pointer-events:none}
 @keyframes ring{0%{opacity:0;transform:scale(.94)}40%{opacity:.6}100%{opacity:0;transform:scale(1.04)}}
 
 /* footer star spin slow */
@@ -482,7 +483,7 @@ footer .brand .star{animation:slowSpin 18s linear infinite}
       <div class="eyebrow">06 / Увидимся в Ink Room</div>
       <h2>Твоя идея.<br>Наш следующий разговор.</h2>
       <address class="addr">Москва, Щёлковское шоссе,<br>д. 3, стр. 3, помещение 016</address>
-      <a class="route" href="https://yandex.ru/maps/?text=Москва%2C%20Щёлковское%20шоссе%2C%203с3" target="_blank" rel="noopener">Найти на карте &#8599;</a>
+      <div class="route-wrap"><a class="route" href="https://yandex.ru/maps/?text=Москва%2C%20Щёлковское%20шоссе%2C%203с3" target="_blank" rel="noopener">Найти на карте &#8599;</a></div>
       <a class="phone" href="tel:+79859387503">+7 985 938-75-03</a>
       <div class="actions">
         <a class="btn" href="https://wa.me/79859387503" target="_blank" rel="noopener">Написать в WhatsApp &#8599;</a>
@@ -499,7 +500,6 @@ footer .brand .star{animation:slowSpin 18s linear infinite}
     <div class="foot-row">
       <a class="brand" href="#top">INK ROOM<span class="star" aria-hidden="true">&#10033;</span></a>
       <p style="margin:0">Тату-студия на Щёлковской · Москва</p>
-      <a href="#top" style="color:var(--lime)">Наверх &#8593;</a>
     </div>
     <div class="draft">Дизайн-концепция · не опубликовано. Цены, контакты и изображения взяты с действующего сайта. Изображения в промоблоках не являются подтверждённым портфолио мастеров. Перед запуском необходимо подтвердить прайс, заменить промофото на актуальные работы и проверить права на материалы.</div>
   </div>
@@ -517,9 +517,10 @@ footer .brand .star{animation:slowSpin 18s linear infinite}
   function frame(){
     var y=window.pageYOffset,h=document.documentElement.scrollHeight-window.innerHeight;
     if(pbar)pbar.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+    ticking=false;
   }
   var ticking=false;
-  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(frame);ticking=true}},{passive:true});frame();
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});frame();
 
   var rvs=document.querySelectorAll('.rv');
   if(reduce||!('IntersectionObserver' in window)){rvs.forEach(function(e){e.classList.add('in')})}
